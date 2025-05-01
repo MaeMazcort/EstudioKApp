@@ -124,7 +124,7 @@ struct PlantView: View {
                     VStack {
                         Image(systemName: "leaf")
                             .font(Font.custom("SF Pro Display", size: 80).weight(.bold))
-                            .foregroundColor(Color.primaryGreen)
+                            .foregroundColor(Color.primaryColor)
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .contentShape(Rectangle())
@@ -178,7 +178,7 @@ struct PlantView: View {
             Image(systemName: "pencil")
         })
         .navigationBarTitle(plant.alias, displayMode: .inline)
-        .accentColor(.primaryGreen)
+        .accentColor(.primaryColor)
     }
 }
 
@@ -200,7 +200,7 @@ struct PlantInformationView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100)
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
             
             Text(plant.commonName)
                 .font(.title)
@@ -210,7 +210,7 @@ struct PlantInformationView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.cream.edgesIgnoringSafeArea(.all)) // Usa Color.cream para el fondo
-        .accentColor(.primaryGreen)
+        .accentColor(.primaryColor)
     }
     private func formattedDate(_ date: Date) -> String {
             let dateFormatter = DateFormatter()

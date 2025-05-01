@@ -13,7 +13,7 @@ struct CalorieComparisonView: View {
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(percentage, 1.0)))
                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                .foregroundColor(percentage >= 1.0 ? .green : .primaryGreen)
+                .foregroundColor(percentage >= 1.0 ? .green : .primaryColor)
                 .rotationEffect(Angle(degrees: -90))
                 .animation(.easeOut, value: percentage)
             

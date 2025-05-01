@@ -59,7 +59,7 @@ struct TripInProgressView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.primaryGreen)
+                    .background(Color.primaryColor)
                     .cornerRadius(10)
                     .padding(.horizontal)
                 }
@@ -80,7 +80,7 @@ struct TripInProgressView: View {
                     .padding(.horizontal)
                 }
             }
-            .accentColor(Color.primaryGreen)
+            .accentColor(Color.primaryColor)
         }
     }
 

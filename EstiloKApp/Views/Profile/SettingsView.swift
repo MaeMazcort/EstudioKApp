@@ -26,13 +26,13 @@ struct SettingsView: View {
                     Button(action: {
                     }) {
                         Text("Save")
-                            .foregroundColor(Color.primaryGreen)
+                            .foregroundColor(Color.primaryColor)
                     }
                     Button(action: {
                     }) {
                         HStack {
                             Text("Change password")
-                                .foregroundColor(Color.primaryGreen)
+                                .foregroundColor(Color.primaryColor)
                             Spacer()
                             Text("Last changed: 3 weeks ago")
                                 .foregroundColor(.secondary)
@@ -42,13 +42,13 @@ struct SettingsView: View {
                     Button(action: {
                     }) {
                         Text("Log out")
-                            .foregroundColor(Color.primaryGreen)
+                            .foregroundColor(Color.primaryColor)
                     }
                     
                 }
             }
             .navigationBarTitle("Settings")
-            .accentColor(Color.primaryGreen)
+            .accentColor(Color.primaryColor)
     }
 }
 

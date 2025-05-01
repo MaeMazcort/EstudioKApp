@@ -18,7 +18,7 @@ struct DishDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(dish.name)
                         .font(.largeTitle.bold())
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
 
                     Text("\(dish.calories) kcal")
                         .font(.subheadline)
@@ -26,7 +26,7 @@ struct DishDetailView: View {
 
                     Text("$\(String(format: "%.2f", dish.price))")
                         .font(.title2.weight(.semibold))
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                 }
                 .padding(.horizontal)
 
@@ -34,7 +34,7 @@ struct DishDetailView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Description")
                         .font(.title3.bold())
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
 
                     Text("A delicious and traditional dish made with fresh local ingredients. Perfectly seasoned and beautifully presented.")
                         .font(.body)
@@ -46,7 +46,7 @@ struct DishDetailView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Ingredients")
                         .font(.title3.bold())
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
 
                     ForEach(["Tomato", "Onion", "Cilantro", "Tortilla", "Pineapple"], id: \ .self) { ingredient in
                         Text("• \(ingredient)")
@@ -58,7 +58,7 @@ struct DishDetailView: View {
             .padding(.top)
         }
         .navigationTitle(dish.name)
-        .accentColor(.primaryGreen)
+        .accentColor(.primaryColor)
     }
 }
 

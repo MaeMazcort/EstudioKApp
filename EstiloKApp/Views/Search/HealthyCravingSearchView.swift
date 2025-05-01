@@ -121,7 +121,7 @@ struct HealthyCravingSearchView: View {
                         
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(.primaryGreen)
+                    .tint(.primaryColor)
                     .padding(.top, 5)
                 }
                 .padding(.horizontal)
@@ -176,7 +176,7 @@ struct HealthyCravingSearchView: View {
         VStack {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 48))
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
                 .padding()
             Text("Encuentra tu antojito saludable")
                 .font(.title2)

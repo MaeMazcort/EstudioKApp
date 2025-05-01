@@ -42,7 +42,7 @@ struct GeneralPlantView: View {
         }
         .navigationTitle("\(plant.myPlant.alias)")
         .frame(width: 393, alignment: .top)
-        .accentColor(.primaryGreen)
+        .accentColor(.primaryColor)
         .sheet(isPresented: $isShowingStage) {
             
         }
@@ -103,7 +103,7 @@ struct CalendarView: View {
                             .padding(10)
                         }
                         .frame(width: 41, height: 50)
-                        .background(Color.primaryGreen.opacity(0.15))
+                        .background(Color.primaryColor.opacity(0.15))
                         .cornerRadius(16)
                     }
                     .padding(.horizontal, -5)
@@ -126,7 +126,7 @@ struct CalendarView: View {
 struct GeneralEvolutionView: View {
     var plant: Plant
     
-    var color = Color.primaryGreen.opacity(0.15)
+    var color = Color.primaryColor.opacity(0.15)
     
     var body: some View {
         
@@ -144,7 +144,7 @@ struct GeneralEvolutionView: View {
 
                 Form {
                     Section(header: Text("REGISTER ACTIVITY")
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                         .font(Font.custom("SF Pro Display", size: 13))
                     ) {
                         HStack {

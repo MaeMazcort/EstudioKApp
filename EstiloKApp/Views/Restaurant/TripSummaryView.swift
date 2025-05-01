@@ -10,7 +10,7 @@ struct TripSummaryView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: 70)
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
                 
             Text("Trip Summary")
                 .font(.largeTitle)
@@ -31,7 +31,7 @@ struct TripSummaryView: View {
                 VStack(spacing: 15) {
                     HStack {
                         Image(systemName: "map.fill")
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
                         Text("Distance: 2.5 km")
                             .font(.headline)
                             .foregroundColor(.black)
@@ -39,7 +39,7 @@ struct TripSummaryView: View {
                     
                     HStack {
                         Image(systemName: "flame.fill")
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
                         Text("Calories burned: 150 kcal")
                             .font(.headline)
                             .foregroundColor(.black)
@@ -47,7 +47,7 @@ struct TripSummaryView: View {
                     
                     HStack {
                         Image(systemName: "clock.fill")
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
                         Text("Time: 21 min")
                             .font(.headline)
                             .foregroundColor(.black)
@@ -66,7 +66,7 @@ struct TripSummaryView: View {
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.primaryGreen)
+                .background(Color.primaryColor)
                 .cornerRadius(15)
                 .shadow(radius: 5)
                 .padding(.horizontal)
@@ -108,7 +108,7 @@ struct TripSummaryView: View {
         .padding()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .navigationTitle("Trip Stats")
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
     }
     func shareTrip() {
         // Implementar funcionalidad de compartir

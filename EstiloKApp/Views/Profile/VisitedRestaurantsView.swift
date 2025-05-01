@@ -19,7 +19,7 @@ struct VisitedRestaurantsView: View {
             }
             .padding()
         }
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
     }
     
     func restaurantRow(name: String, icon: String, color: Color, date: String) -> some View {
@@ -40,7 +40,7 @@ struct VisitedRestaurantsView: View {
             Spacer()
             
             Image(systemName: "chevron.right")
-                .foregroundColor(.darkGreen)
+                .foregroundColor(.secondaryColor)
         }
         .padding()
         .background(Color(.systemGray6))

@@ -63,7 +63,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     Text("\(stage.duration)")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -81,7 +81,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     Text("\(stage.description)")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -99,7 +99,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     Text("\(stage.waterRequirement)")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -117,7 +117,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     if stage.sunlightRequirement.1 == 0{
                                         Text("0 hours")
@@ -143,7 +143,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     Text("\(stage.soilComposition)")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -161,7 +161,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     Text("\(Int(stage.volume.rounded()))L")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -179,7 +179,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     Text("\(stage.drainingRequirement ? "Yes" : "No")")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -197,7 +197,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     
                                     if let tempRange = stage.temperatureRange {
                                         Text("\(Int(tempRange.0))°C to \(Int(tempRange.1))°C")
@@ -217,7 +217,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                     
                                     Text("\(Int(stage.rootDepth))cm")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -235,7 +235,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                     
                                     Text("\(Int(stage.spacing))cm")
                                         .font(Font.custom("SF Pro Display", size: 11))
@@ -253,7 +253,7 @@ struct TomatoStageDetailView: View {
                                                 .weight(.semibold)
                                                 .italic()
                                         )
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                     
                                     Text("\(stage.notes)")
                                         .font(Font.custom("SF Pro Display", size: 11))

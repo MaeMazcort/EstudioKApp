@@ -16,7 +16,7 @@ struct NewPlantView: View {
         @State private var selectedPlantType = "Select a type"
     let stages = ["Sprout", "Seedling", "Vegetative", "Flowering", "Ripening"]
     
-    var color = Color.primaryGreen.opacity(0.15)
+    var color = Color.primaryColor.opacity(0.15)
 
     let growthStages = ["Germination", "Seed", "Sprout", "Plant"]
     let filtrations = ["Yes", "No"]
@@ -26,7 +26,7 @@ struct NewPlantView: View {
                     Section(header:
                         HStack {
                         Text("My new plant's name will be...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -35,7 +35,7 @@ struct NewPlantView: View {
                                 showingInfoAlert[0] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Plant's name", isPresented: $showingInfoAlert[0]) {
                                 Button("OK", role: .cancel) { }
@@ -53,7 +53,7 @@ struct NewPlantView: View {
                     Section(header:
                         HStack {
                         Text("My new plant's description will be...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -62,7 +62,7 @@ struct NewPlantView: View {
                                 showingInfoAlert[1] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Plant's description", isPresented: $showingInfoAlert[1]) {
                                 Button("OK", role: .cancel) { }
@@ -80,7 +80,7 @@ struct NewPlantView: View {
                     Section(header:
                         HStack {
                             Text("Its current growth stage is...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -89,7 +89,7 @@ struct NewPlantView: View {
                                 showingInfoAlert[2] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Growth state", isPresented: $showingInfoAlert[2]) {
                                 Button("OK", role: .cancel) { }
@@ -118,7 +118,7 @@ struct NewPlantView: View {
                             }
                             .padding()
                             .foregroundColor(selectedStage != "Select a stage" ? .black : .gray.opacity(0.6))
-                            .background(Color.primaryGreen.opacity(0.15))
+                            .background(Color.primaryColor.opacity(0.15))
                             .cornerRadius(8)
                             .padding(.horizontal, -20)
                             .padding(.top, -15)
@@ -128,7 +128,7 @@ struct NewPlantView: View {
                     Section(header:
                         HStack {
                             Text("It will be a...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -137,7 +137,7 @@ struct NewPlantView: View {
                                 showingInfoAlert[3] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Type of plant", isPresented: $showingInfoAlert[3]) {
                                 Button("OK", role: .cancel) { }
@@ -159,7 +159,7 @@ struct NewPlantView: View {
                             }
                             .padding()
                             .foregroundColor(selectedPlantType != "Select a type" ? .black : .gray.opacity(0.6))
-                            .background(Color.primaryGreen.opacity(0.15))
+                            .background(Color.primaryColor.opacity(0.15))
                             .cornerRadius(8)
                             .padding(.horizontal, -20)
                             .padding(.top, -15)
@@ -179,7 +179,7 @@ struct NewPlantView: View {
                             }
                             .foregroundColor(.white)
                             .padding()
-                            .background(Color.primaryGreen)
+                            .background(Color.primaryColor)
                             .cornerRadius(10)
                             Spacer()
                         }

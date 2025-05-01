@@ -29,7 +29,7 @@ struct ProfileView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 100, height: 100)
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
                         
                         Text("\(userName)")
                             .font(.title)
@@ -43,11 +43,11 @@ struct ProfileView: View {
                     
                     // Personal details
                     GroupBox(label: Label("About Me", systemImage: "person.text.rectangle")
-                                .foregroundColor(.primaryGreen)) {
+                                .foregroundColor(.primaryColor)) {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
                                 Image(systemName: "envelope.fill")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                                     .frame(width: 20)
                                 Text(userEmail)
                                     .font(.callout)
@@ -55,7 +55,7 @@ struct ProfileView: View {
                             
                             HStack {
                                 Image(systemName: "calendar")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                                     .frame(width: 20)
                                 Text("\(userAge) years")
                                     .font(.callout)
@@ -63,7 +63,7 @@ struct ProfileView: View {
                             
                             HStack {
                                 Image(systemName: "location.fill")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                                     .frame(width: 20)
                                 Text("Puebla, MX")
                                     .font(.callout)
@@ -112,7 +112,7 @@ struct ProfileView: View {
                                     )
                                     Spacer()
                                     Image(systemName: "chevron.right")
-                                        .foregroundColor(.darkGreen)
+                                        .foregroundColor(.secondaryColor)
                                 }
                                 HStack {
                                     ActivityCard(
@@ -126,7 +126,7 @@ struct ProfileView: View {
                                     )
                                     Spacer()
                                     Image(systemName: "chevron.right")
-                                        .foregroundColor(.darkGreen)
+                                        .foregroundColor(.secondaryColor)
                                 }
                                 HStack {
                                     ActivityCard(
@@ -140,12 +140,12 @@ struct ProfileView: View {
                                     )
                                     Spacer()
                                     Image(systemName: "chevron.right")
-                                        .foregroundColor(.darkGreen)
+                                        .foregroundColor(.secondaryColor)
                                 }
                                 HStack {
                                     NavigationLink(destination: VisitedRestaurantsView()) {
                                                                            Text("View All")
-                                                                               .foregroundColor(.darkGreen)
+                                                                               .foregroundColor(.secondaryColor)
                                                                                .font(.title3)
                                                                        }
                                 }
@@ -173,7 +173,7 @@ struct ProfileView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
         .onAppear {
             fetchUserDataFromDatabase()
         }

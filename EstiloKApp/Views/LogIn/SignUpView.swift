@@ -26,7 +26,7 @@ struct SignUpView: View {
                 Text("Create an Account")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(Color.primaryGreen)
+                    .foregroundColor(Color.primaryColor)
                     .padding(.top, 50)
 
                 VStack(spacing: 16) {
@@ -66,7 +66,7 @@ struct SignUpView: View {
         .navigationDestination(isPresented: $isShowingUserInfo) {
             UserInformationView()
         }
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
     }
     
     private func registerUser() {
@@ -147,7 +147,7 @@ struct PrimaryActionStyle: ButtonStyle {
         configuration.label
             .font(.headline)
             .foregroundColor(.white)
-            .background(Color.primaryGreen)
+            .background(Color.primaryColor)
             .cornerRadius(10)
             .opacity(configuration.isPressed ? 0.8 : 1.0)
     }

@@ -16,7 +16,7 @@ struct LogInView: View {
                 Text("Welcome to Antojo Activo")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(Color.darkGreen)
+                    .foregroundColor(Color.secondaryColor)
                     .padding(.top, 10)
                 Image("logoAntojoActivo")
                     .resizable()
@@ -73,7 +73,7 @@ struct LogInView: View {
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.primaryGreen)
+                            .background(Color.primaryColor)
                             .cornerRadius(12)
                     }
                 }
@@ -94,7 +94,7 @@ struct LogInView: View {
                 Text(alertMessage)
             }
         }
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
     }
 
     private func loginUser() {

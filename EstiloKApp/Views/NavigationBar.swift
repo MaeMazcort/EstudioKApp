@@ -43,7 +43,7 @@ struct NavigationBar: View {
                 .tag(2)
         }
         .navigationBarBackButtonHidden(true)
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
     }
 }
 

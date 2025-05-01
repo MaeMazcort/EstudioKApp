@@ -57,7 +57,7 @@ struct SocialGeneralView: View {
                                 AchievementBadge(
                                     title: "Top Reviewer",
                                     icon: "star.fill",
-                                    badgeColor: Color.primaryGreen.opacity(0.3),
+                                    badgeColor: Color.primaryColor.opacity(0.3),
                                     iconColor: Color(red: 0.85, green: 0.4, blue: 0.1)
                                 )
                             }
@@ -70,7 +70,7 @@ struct SocialGeneralView: View {
             .navigationTitle("Social")
         }
         .navigationBarBackButtonHidden(true)
-        .accentColor(.primaryGreen)
+        .accentColor(.primaryColor)
     }
 }
 
@@ -180,7 +180,7 @@ struct CircularGoalView: View {
                 // Progress Arc
                 Circle()
                     .trim(from: 0, to: progress)
-                    .stroke(Color.primaryGreen, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                    .stroke(Color.primaryColor, style: StrokeStyle(lineWidth: 8, lineCap: .round))
                     .rotationEffect(.degrees(-90))
                     .frame(width: 60, height: 60)
 
@@ -188,12 +188,12 @@ struct CircularGoalView: View {
                 Image(systemName: icon)
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(Circle().fill(Color.primaryGreen))
+                    .background(Circle().fill(Color.primaryColor))
             }
 
             Text("\(Int(progress * 100))%")
                 .font(.headline)
-                .foregroundColor(Color.primaryGreen)
+                .foregroundColor(Color.primaryColor)
 
             Text(label)
                 .font(.caption)
@@ -217,19 +217,19 @@ struct CircularStatView: View {
 
                 Circle()
                     .trim(from: 0.0, to: progress)
-                    .stroke(Color.primaryGreen, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .stroke(Color.primaryColor, style: StrokeStyle(lineWidth: 6, lineCap: .round))
                     .rotationEffect(.degrees(-90))
                     .frame(width: 60, height: 60)
 
                 Image(systemName: icon)
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(Circle().fill(Color.primaryGreen))
+                    .background(Circle().fill(Color.primaryColor))
             }
 
             Text("\(Int(progress * 100))%")
                 .font(.headline)
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
 
             Text(label)
                 .font(.caption)
@@ -250,7 +250,7 @@ struct BarChartView: View {
                         .frame(width: 80, alignment: .leading)
                         .font(.caption)
                     Rectangle()
-                        .fill(Color.primaryGreen)
+                        .fill(Color.primaryColor)
                         .frame(width: CGFloat(value) * 20, height: 14)
                         .cornerRadius(6)
                     Text("\(value)")

@@ -27,11 +27,11 @@ struct NotificationView: View {
                 VStack(alignment: .leading) {
                     Text(notification.title)
                         .fontWeight(.bold)
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                     Text(notification.message)
                         .font(.caption)
                 }
-                .listRowBackground(Color.primaryGreen.opacity(0.15))
+                .listRowBackground(Color.primaryColor.opacity(0.15))
             }
             .onDelete(perform: delete)
         }

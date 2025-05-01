@@ -20,7 +20,7 @@ struct GardenView: View {
                 }
             }
             .navigationTitle("Plants of \(garden.name)")
-            .accentColor(.primaryGreen)
+            .accentColor(.primaryColor)
             .padding()
         }
     }
@@ -38,12 +38,12 @@ struct AddPlantButtonView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
-                    .foregroundColor(.primaryGreen)
+                    .foregroundColor(.primaryColor)
                     .padding(.top)
                 
                 Text("Add")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.primaryGreen)
+                    .foregroundColor(.primaryColor)
                 
                 Text("New plant")
                     .font(.system(size: 12, weight: .bold))

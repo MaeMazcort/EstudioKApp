@@ -201,7 +201,7 @@ struct HomeView: View {
                                     Text(category)
                                         .padding(.horizontal, 14)
                                         .padding(.vertical, 8)
-                                        .background(selectedCategory == category ? Color.primaryGreen : Color(.systemGray5))
+                                        .background(selectedCategory == category ? Color.primaryColor : Color(.systemGray5))
                                         .foregroundColor(selectedCategory == category ? .white : .black)
                                         .cornerRadius(20)
                                 }
@@ -220,7 +220,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Explore nearby places")
                         .font(.headline)
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                         .padding(.top, 16)
                         .padding(.horizontal)
  
@@ -303,7 +303,7 @@ struct HomeView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
         .onAppear {
             fetchUserNameFromDatabase()
         }
@@ -406,7 +406,7 @@ struct PopularNearbyView: View {
                                     
                                     Label(restaurant.calories, systemImage: "flame.fill")
                                         .font(.caption)
-                                        .foregroundColor(.primaryGreen.opacity(0.6))
+                                        .foregroundColor(.primaryColor.opacity(0.6))
                                 }
                             }
                             .padding(.horizontal, 4)
@@ -435,7 +435,7 @@ struct WeeklyActivitySummaryView: View {
         }) {
             ZStack {
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.primaryGreen.opacity(0.8), Color.navyBlue.opacity(0.85)]),
+                    gradient: Gradient(colors: [Color.primaryColor.opacity(0.8), Color.navyBlue.opacity(0.85)]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )

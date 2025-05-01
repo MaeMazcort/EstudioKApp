@@ -8,7 +8,7 @@ struct WalkingAnimationView: View {
             .resizable()
             .scaledToFit()
             .frame(width: 150, height: 150)
-            .foregroundColor(.primaryGreen)
+            .foregroundColor(.primaryColor)
             .offset(y: isWalking ? -10 : 10)
             .animation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true), value: isWalking)
             .onAppear {

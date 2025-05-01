@@ -8,7 +8,7 @@ struct RestaurantMenuView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Menu")
                 .font(.title2.bold())
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
@@ -29,7 +29,7 @@ struct RestaurantMenuView: View {
                                         toggleFavorite(dishID: dish.id)
                                     }) {
                                         Image(systemName: favorites.contains(dish.id) ? "heart.fill" : "heart")
-                                            .foregroundColor(.primaryGreen)
+                                            .foregroundColor(.primaryColor)
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                     .padding(.top, -15)
@@ -42,10 +42,10 @@ struct RestaurantMenuView: View {
                                 HStack {
                                     Text("$\(String(format: "%.2f", dish.price))")
                                         .font(.caption2)
-                                        .foregroundColor(.primaryGreen)
+                                        .foregroundColor(.primaryColor)
                                     Spacer()
                                     Image(systemName: "plus.circle")
-                                            .foregroundColor(.primaryGreen)
+                                            .foregroundColor(.primaryColor)
                                 }
                                 
                             }

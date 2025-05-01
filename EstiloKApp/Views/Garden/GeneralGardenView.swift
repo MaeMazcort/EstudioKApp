@@ -59,7 +59,7 @@ struct GeneralGardenView: View {
         }
         .navigationTitle("\(garden.name)")
         .frame(width: 393, alignment: .top)
-        .accentColor(.primaryGreen)
+        .accentColor(.primaryColor)
         .sheet(isPresented: $showingTipsSheet) {
             //NewTipsView()
         }
@@ -167,9 +167,9 @@ struct LogCardGardenView: View {
                 Button("Dismiss") {
                     // Empty log
                 }
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
                 .padding()
-                .background(Color.primaryGreen.opacity(0.15))
+                .background(Color.primaryColor.opacity(0.15))
                 .cornerRadius(10)
             }
             .padding(.horizontal)
@@ -183,13 +183,13 @@ struct LogCardGardenView: View {
                             HStack {
                                 Text(log.title)
                                     .italic()
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                                 
                                 Spacer()
                                 
                                 Text("\(log.daysFromCreation) days ago")
                                     .font(.caption)
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             
                             Text(log.description)
@@ -199,7 +199,7 @@ struct LogCardGardenView: View {
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.primaryGreen.opacity(0.15))
+                        .background(Color.primaryColor.opacity(0.15))
                         .cornerRadius(12)
                         .shadow(radius: 4)
                     }

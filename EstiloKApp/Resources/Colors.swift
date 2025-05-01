@@ -3,9 +3,14 @@ import SwiftUI
 import UIKit
 
 extension Color {
-    public static let primaryGreen = Color(hex: "#B90504")
-    public static let darkGreen = Color(hex: "#990100")
-    public static let cream = Color(hex: "#F6F6F6")
+    // Paleta de colores
+    public static let primaryColor = Color(hex: "#C89F68")
+    public static let secondaryColor = Color(hex: "#E6C89C")
+    public static let cream = Color(hex: "#F5F5F0")
+    public static let gray = Color(hex: "#4D4D4D")
+    public static let carbon = Color(hex: "#1C1C1C")
+    
+    // Otros
     public static let orange = Color(hex: "#E8E8E8")
     public static let brown = Color(hex: "#333333")
     public static let navyBlue = Color(hex: "#8D99AE")

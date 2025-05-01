@@ -17,7 +17,7 @@ struct NewGardenView: View {
     @State private var isUsingCurrentLocation: Bool = false
     @State private var showingInfoAlert = Array(repeating: false, count: 9)
     
-    var color = Color.primaryGreen.opacity(0.15)
+    var color = Color.primaryColor.opacity(0.15)
 
     let types = ["Pot", "Raised Bed", "Hydroponic System"]
     let locations = ["Indoors", "Outdoors"]
@@ -29,7 +29,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                         Text("My new garden's name will be...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -38,7 +38,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[0] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Garden's name", isPresented: $showingInfoAlert[0]) {
                                 Button("OK", role: .cancel) { }
@@ -56,7 +56,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                         Text("My new garden's description will be...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -65,7 +65,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[1] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Garden's description", isPresented: $showingInfoAlert[1]) {
                                 Button("OK", role: .cancel) { }
@@ -83,7 +83,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                             Text("It will be a...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -92,7 +92,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[2] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Type of plant", isPresented: $showingInfoAlert[2]) {
                                 Button("OK", role: .cancel) { }
@@ -116,7 +116,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                         Text("It will be located...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -125,7 +125,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[3] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Location", isPresented: $showingInfoAlert[3]) {
                                 Button("OK", role: .cancel) { }
@@ -143,13 +143,13 @@ struct NewGardenView: View {
                             }
                         }
                         .pickerStyle(SegmentedPickerStyle())
-                        .listRowBackground(Color.primaryGreen.opacity(0.15))
+                        .listRowBackground(Color.primaryColor.opacity(0.15))
                     }
                 
                     Section(header:
                         HStack {
                             Text("It has the following dimensions...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -158,7 +158,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[4] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Dimensions", isPresented: $showingInfoAlert[4]) {
                                 Button("OK", role: .cancel) { }
@@ -184,7 +184,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                             Text("Its geographical location will be at...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -193,7 +193,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[5] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Geographical location", isPresented: $showingInfoAlert[5]) {
                                 Button("OK", role: .cancel) { }
@@ -216,7 +216,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                         Text("Its daily exposition levels are...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -225,7 +225,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[6] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Daily exposition levels", isPresented: $showingInfoAlert[6]) {
                                 Button("OK", role: .cancel) { }
@@ -245,7 +245,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                         Text("Its soil composition (100% total)...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -254,7 +254,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[7] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Soil composition", isPresented: $showingInfoAlert[7]) {
                                 Button("OK", role: .cancel) { }
@@ -280,7 +280,7 @@ struct NewGardenView: View {
                     Section(header:
                         HStack {
                         Text("Filtration system...")
-                                .foregroundColor(.primaryGreen)
+                                .foregroundColor(.primaryColor)
                                 .font(Font.custom("SF Pro Display", size: 13))
                         
                             Spacer()
@@ -289,7 +289,7 @@ struct NewGardenView: View {
                                 showingInfoAlert[8] = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundColor(.primaryGreen)
+                                    .foregroundColor(.primaryColor)
                             }
                             .alert("Filtration system", isPresented: $showingInfoAlert[8]) {
                                 Button("OK", role: .cancel) { }
@@ -307,7 +307,7 @@ struct NewGardenView: View {
                             }
                         }
                         .pickerStyle(SegmentedPickerStyle())
-                        .listRowBackground(Color.primaryGreen.opacity(0.15))
+                        .listRowBackground(Color.primaryColor.opacity(0.15))
                     }
                     
                     Section {
@@ -318,7 +318,7 @@ struct NewGardenView: View {
                             }
                             .foregroundColor(.white)
                             .padding()
-                            .background(Color.primaryGreen)
+                            .background(Color.primaryColor)
                             .cornerRadius(10)
                             Spacer()
                         }

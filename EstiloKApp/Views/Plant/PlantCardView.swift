@@ -20,7 +20,7 @@ struct PlantCardView: View {
                     Text(plant.commonName)
                         .font(.title)
                         .fontWeight(.bold)
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
 
                     Text(plant.scientificName)
                         .font(.subheadline)
@@ -33,9 +33,9 @@ struct PlantCardView: View {
                     // Action for more info button
                 }
                 .padding(5)
-                .background(Color.primaryGreen.opacity(0.15))
+                .background(Color.primaryColor.opacity(0.15))
                 .cornerRadius(40)
-                .foregroundColor(.primaryGreen)
+                .foregroundColor(.primaryColor)
             }
             .padding(.trailing)  // Add padding to the right side of the button
 
@@ -44,7 +44,7 @@ struct PlantCardView: View {
                 HStack{
                     Text("Difficulty")
                         .font(.headline)
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                         .padding(.top, 10)
                     Spacer()
                     Text("Hard")
@@ -56,7 +56,7 @@ struct PlantCardView: View {
                 if let description = plant.description {
                     Text("Description")
                         .font(.headline)
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                         .padding(.top, 10)
                     
                     Text(description)
@@ -68,7 +68,7 @@ struct PlantCardView: View {
                 if let benefits = plant.benefits {
                     Text("Benefits")
                         .font(.headline)
-                        .foregroundColor(.primaryGreen)
+                        .foregroundColor(.primaryColor)
                         .padding(.top, 10)
                     
                     Text(benefits)

@@ -23,7 +23,7 @@ struct UserInformationView: View {
                 Text("Complete Your Profile")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(.primaryGreen)
+                    .foregroundColor(.primaryColor)
                     .padding(.top, 40)
                 
                 VStack(spacing: 20) {
@@ -67,7 +67,7 @@ struct UserInformationView: View {
         .navigationDestination(isPresented: $isShowingNavBar) {
             NavigationBar()
         }
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
         .navigationBarBackButtonHidden(true)
     }
     
@@ -150,7 +150,7 @@ struct FormNumberField: View {
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.primaryGreen, lineWidth: 1)
+                        .stroke(Color.primaryColor, lineWidth: 1)
                 )
                 .onChange(of: text) { newValue in
                     // Filter non-numeric characters and allow single decimal point
@@ -172,7 +172,7 @@ struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.primaryGreen)
+            .background(Color.primaryColor)
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)

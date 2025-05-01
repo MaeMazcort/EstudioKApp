@@ -17,7 +17,7 @@ struct CollectionGardenView: View {
             }
             .navigationTitle("Gardens")
         }
-        .accentColor(Color.primaryGreen)
+        .accentColor(Color.primaryColor)
     }
 }
 
@@ -32,7 +32,7 @@ struct AddGardenButtonView: View {
             HStack {
                 Image(systemName: "plus.app")
                     .font(Font.custom("SF Pro Display", size: 35).weight(.bold))
-                    .foregroundColor(Color.primaryGreen)
+                    .foregroundColor(Color.primaryColor)
                     .padding(.leading, 10)
                 
                 Spacer()
@@ -40,7 +40,7 @@ struct AddGardenButtonView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Text("Add")
                         .font(Font.custom("SF Pro Display", size: 25).weight(.bold))
-                        .foregroundColor(Color.primaryGreen)
+                        .foregroundColor(Color.primaryColor)
                     
                     Text("New garden")
                         .font(Font.custom("SF Pro Display", size: 18).weight(.bold))

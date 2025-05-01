@@ -27,7 +27,7 @@ struct RestaurantDetailView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(restaurant.name)
                             .font(.largeTitle.bold())
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
 
                         Text(restaurant.description)
                             .font(.body)
@@ -38,7 +38,7 @@ struct RestaurantDetailView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("How to go?")
                             .font(.title2.bold())
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
 
                         Picker("Choose a Spot", selection: $selectedLocation) {
                             Text("🚶‍♂️ Walk").tag("Walk")
@@ -50,7 +50,7 @@ struct RestaurantDetailView: View {
                         .frame(height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                        .shadow(color: .primaryGreen.opacity(0.1), radius: 4, x: 0, y: 2)
+                        .shadow(color: .primaryColor.opacity(0.1), radius: 4, x: 0, y: 2)
 
                         // ✅ Reemplazamos el estado con un NavigationLink directo
                         NavigationLink(destination: TripInProgressView(menu: restaurant.menu, destinationName: restaurant.name)) {
@@ -63,7 +63,7 @@ struct RestaurantDetailView: View {
                             }
                             .padding(.vertical, 8)
                             .padding(.horizontal, 40)
-                            .background(Color.primaryGreen)
+                            .background(Color.primaryColor)
                             .cornerRadius(10)
                             .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
                         }
@@ -74,7 +74,7 @@ struct RestaurantDetailView: View {
                     VStack(alignment: .leading) {
                         Text("Location")
                             .font(.title2.bold())
-                            .foregroundColor(.primaryGreen)
+                            .foregroundColor(.primaryColor)
                             .padding(.leading, 18)
 
                         MapMultiplePointsView(restaurants: [restaurant], userLocation: userLocation)
@@ -83,7 +83,7 @@ struct RestaurantDetailView: View {
                 .padding(.vertical)
             }
             .navigationTitle(restaurant.name)
-            .accentColor(.primaryGreen)
+            .accentColor(.primaryColor)
         }
     }
 }

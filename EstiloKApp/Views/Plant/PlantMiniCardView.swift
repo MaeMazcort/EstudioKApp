@@ -16,7 +16,7 @@ struct PlantMiniCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.primaryGreen)
+                    .foregroundColor(.primaryColor)
                 
                 Spacer()
                 
@@ -55,7 +55,7 @@ struct TreeCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.primaryGreen)
+                    .foregroundColor(.primaryColor)
                 
                 Spacer()
 
