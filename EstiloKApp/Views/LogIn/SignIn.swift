@@ -6,7 +6,7 @@ struct SignInView: View {
     @State private var rememberMe: Bool = false
     @State private var isPasswordVisible: Bool = false
     @State private var isShowingSignUp = false
-    @State private var isShowingNavBar = false
+    @State private var isShowingHome = false  // Renamed from isShowingNavBar for clarity
 
     var body: some View {
         NavigationStack {
@@ -77,7 +77,7 @@ struct SignInView: View {
                 .padding(.horizontal)
 
                 Button(action: {
-                    isShowingNavBar = true
+                    isShowingHome = true
                 }) {
                     Text("Sign in")
                         .foregroundColor(.cream)
@@ -149,8 +149,8 @@ struct SignInView: View {
                 Spacer()
             }
             .background(Color.cream)
-            .navigationDestination(isPresented: $isShowingNavBar) {
-                NavigationBar()
+            .navigationDestination(isPresented: $isShowingHome) {
+                NavigationBar()  // This will show the NavigationBar with HomeView as the default tab
             }
             .navigationDestination(isPresented: $isShowingSignUp) {
                 SignUpView()
