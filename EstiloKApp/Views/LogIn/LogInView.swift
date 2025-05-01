@@ -1,110 +1,73 @@
 import SwiftUI
-import FirebaseAuth
-import FirebaseDatabase
 
 struct LogInView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
     @State private var isShowingSignUp = false
-    @State private var isShowingNavBar = false
-    @State private var showAlert = false
-    @State private var alertMessage = ""
+    @State private var isShowingSignIn = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 30) {
-                Text("Welcome to Antojo Activo")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.secondaryColor)
-                    .padding(.top, 10)
-                Image("logoAntojoActivo")
+                Spacer()
+
+                Image("Logo")
                     .resizable()
-                    .frame(height: 200)
-                    .frame(width: 200)
-                    .cornerRadius(12)
-                
-                // Campos de entrada
-                VStack(spacing: 20) {
-                    TextField("Email", text: $email)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                        .textInputAutocapitalization(.never)
-                        .padding()
-                        .background(Color.cream)
-                        .cornerRadius(8)
+                    .scaledToFit()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
 
-                    SecureField("Password", text: $password)
-                        .padding()
-                        .background(Color.cream)
-                        .cornerRadius(8)
+                Image("Tienda")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 180)
+
+                Spacer()
+
+                Button(action: {
+                    isShowingSignIn = true
+                }) {
+                    HStack {
+                        Text("Sign in")
+                            .foregroundColor(.cream)
+                            .fontWeight(.semibold)
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .foregroundColor(.cream)
+                    }
+                    .padding()
+                    .background(Color.brown)
+                    .cornerRadius(25)
+                    .shadow(radius: 3)
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 40)
 
-                // Botones
-                VStack(spacing: 15) {
-                    Button(action: loginUser) {
-                        Text("Login")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.brown)
-                            .cornerRadius(12)
+                Button(action: {
+                    isShowingSignUp = true
+                }) {
+                    HStack {
+                        Text("Sign up")
+                            .foregroundColor(.primaryColor)
+                            .fontWeight(.semibold)
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .foregroundColor(.primaryColor)
                     }
-
-                    Button(action: {
-                        isShowingSignUp = true
-                    }) {
-                        Text("Sign Up")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.navyBlue)
-                            .cornerRadius(12)
-                    }
-
-                    Button(action: {
-                        // Acción para autenticación biométrica
-                    }) {
-                        Text("Authenticate With Biometrics")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.primaryColor)
-                            .cornerRadius(12)
-                    }
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.primaryColor, lineWidth: 1.5)
+                    )
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 40)
+
+                Spacer()
             }
-            .padding(.bottom, 10) // Espacio inferior
-
-            // Navegación
-            .navigationDestination(isPresented: $isShowingNavBar) {
-                NavigationBar()
+            .navigationDestination(isPresented: $isShowingSignIn) {
+                SignInView()
             }
             .navigationDestination(isPresented: $isShowingSignUp) {
                 SignUpView()
             }
-            .alert("Error", isPresented: $showAlert) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text(alertMessage)
-            }
-        }
-        .accentColor(Color.primaryColor)
-    }
-
-    private func loginUser() {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                alertMessage = "Error: \(error.localizedDescription)"
-                showAlert = true
-                return
-            }
-            isShowingNavBar = true
+            
         }
     }
 }
@@ -112,4 +75,3 @@ struct LogInView: View {
 #Preview {
     LogInView()
 }
-
