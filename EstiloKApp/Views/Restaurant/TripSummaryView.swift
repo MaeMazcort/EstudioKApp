@@ -101,7 +101,7 @@ struct TripSummaryView: View {
                 ]
                 let userLocation = CLLocationCoordinate2D(latitude: 19.0625, longitude: -98.3040)
                 
-                HomeView(restaurants: sampleRestaurants, userLocation: userLocation)
+                //HomeView(restaurants: sampleRestaurants, userLocation: userLocation)
             }
         }
         

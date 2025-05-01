@@ -2,57 +2,62 @@ import SwiftUI
 import MapKit
 
 struct NavigationBar: View {
-    @State private var selectedTab = 1
-    
-    let users = generateExampleUsers()
+    @State private var selectedTab = 2
     
     var body: some View {
+        // Eliminamos el NavigationView anidado del TabView
         TabView(selection: $selectedTab) {
+            // Favorites/Heart Tab
             SocialGeneralView()
                 .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Social")
+                    Image(systemName: "heart")
+                    Text("Favorites")
                 }
                 .tag(0)
             
-            let sampleRestaurants = [
-                Restaurants(
-                    name: "Casa Cholula",
-                    description: "Traditional Mexican food with a modern twist.",
-                    image: Image(systemName: "photo"),
-                    location: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036),
-                    menu: [Dish(name: "Tacos al Pastor", calories: 450, price: 49.99)],
-                    visitedBy: [],
-                    reviews: []
-                )
-            ]
-            let userLocation = CLLocationCoordinate2D(latitude: 19.0625, longitude: -98.3040)
-            
-            HomeView(restaurants: sampleRestaurants, userLocation: userLocation)
+        
+            // Cart Tab
+            Text("Shopping Cart")
                 .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
+                    Image(systemName: "cart")
+                    Text("Cart")
                 }
                 .tag(1)
-            
-            ProfileView()
+            // Home Tab
+            HomeView()
                 .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
+                    Image(systemName: "house")
+                    Text("Home")
                 }
                 .tag(2)
+            
+            
+            // Chat/Messages Tab
+            Text("Messages")
+                .tabItem {
+                    Image(systemName: "message")
+                    Text("Messages")
+                }
+                .tag(3)
+            
+            // Profile Tab
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Profile")
+                }
+                .tag(4)
+            
         }
+        .accentColor(.primaryColor) // Color de los íconos seleccionados
         .navigationBarBackButtonHidden(true)
-        .accentColor(Color.primaryColor)
-    }
-}
-
-struct NavigationBar_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationBar()
-            .navigationBarBackButtonHidden(true)
     }
 }
 
 
 
+
+
+#Preview {
+    NavigationBar()
+}
