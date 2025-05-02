@@ -1,47 +1,5 @@
 import SwiftUI
 
-struct CourseCardView: View {
-    let title: String
-    let rating: Int
-    let reviews: Int
-    let price: Int
-    let tag: String
-    let color: Color
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.headline)
-                .padding()
-                .background(color)
-                .foregroundColor(.white)
-                .cornerRadius(20)
-
-            HStack {
-                ForEach(0..<5) { index in
-                    Image(systemName: index < rating ? "star.fill" : "star")
-                        .foregroundColor(.primaryColor)
-                        .font(.caption)
-                }
-                Text("(\(reviews))")
-                    .font(.caption)
-            }
-
-            HStack {
-                Text(tag)
-                    .padding(6)
-                    .background(Color.secondaryColor.opacity(0.2))
-                    .cornerRadius(10)
-                Spacer()
-                Text("$\(price)")
-                    .bold()
-            }
-        }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 20).stroke(Color.gray.opacity(0.3)))
-    }
-}
-
 struct ExpertCardView: View {
     let name: String
     let role: String
