@@ -151,6 +151,7 @@
 		A5C90ED12D9D581F00E322EE /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
 		A5C90ED42D9D869F00E322EE /* Restaurant */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Restaurant; sourceTree = "<group>"; };
 		AB04D5FD2DC40E0000B4BFEF /* Onboarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Onboarding; sourceTree = "<group>"; };
+		AB04D63D2DC477EF00B4BFEF /* Payment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Payment; sourceTree = "<group>"; };
 		ABA417B82D9E1B6600980862 /* Map */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Map; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -233,6 +234,7 @@
 		061572B52B9246C8002F6ADD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AB04D63D2DC477EF00B4BFEF /* Payment */,
 				AB04D5FD2DC40E0000B4BFEF /* Onboarding */,
 				ABA417B82D9E1B6600980862 /* Map */,
 				A5C90ED42D9D869F00E322EE /* Restaurant */,
@@ -395,6 +397,7 @@
 				A5C90ED12D9D581F00E322EE /* Search */,
 				A5C90ED42D9D869F00E322EE /* Restaurant */,
 				AB04D5FD2DC40E0000B4BFEF /* Onboarding */,
+				AB04D63D2DC477EF00B4BFEF /* Payment */,
 				ABA417B82D9E1B6600980862 /* Map */,
 			);
 			name = EstiloKApp;
