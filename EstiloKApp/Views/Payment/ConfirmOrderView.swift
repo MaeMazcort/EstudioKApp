@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct OrderProduct: Identifiable {
     let id = UUID()
@@ -13,6 +14,7 @@ struct ConfirmOrderView: View {
         OrderProduct(name: "Green tea Hair-Food", price: 30, imageName: "espa", quantity: 1),
         OrderProduct(name: "Conditioner", price: 30, imageName: "conditioner", quantity: 1)
     ]
+    @State private var showMapSheet = false
     
     var body: some View {
         ScrollView {
@@ -37,30 +39,39 @@ struct ConfirmOrderView: View {
                     Text("Deliver to")
                         .foregroundColor(.carbon)
                         .font(.system(size: 18, weight: .bold))
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(Color.secondaryColor.opacity(0.2))
-                                .frame(width: 36, height: 36)
-                            Image(systemName: "mappin.and.ellipse")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 16, height: 16)
-                                .foregroundColor(.primaryColor)
+                    
+                    Button(action: {
+                        showMapSheet.toggle()
+                    }) {
+                        HStack {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.secondaryColor.opacity(0.2))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: "mappin.and.ellipse")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 16, height: 16)
+                                    .foregroundColor(.primaryColor)
+                            }
+                            Text("Select your location")
+                                .foregroundColor(.gray)
+                            Spacer()
+                            Image(systemName: "plus")
+                                .foregroundColor(.carbon)
                         }
-                        Text("Select your location")
-                            .foregroundColor(.gray)
-                        Spacer()
-                        Image(systemName: "plus")
-                            .foregroundColor(.carbon)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.gray.opacity(0.4), lineWidth: 1)
+                        )
                     }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.gray.opacity(0.4), lineWidth: 1)
-                    )
                 }
                 .padding(.horizontal)
+                .sheet(isPresented: $showMapSheet) {
+                    MapSheetView()
+                        .presentationDetents([.fraction(0.6), .medium, .large])
+                }
                 
                 // PAYMENT METHOD SECTION
                 VStack(alignment: .leading, spacing: 8) {
