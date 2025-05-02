@@ -19,21 +19,30 @@ struct AddPaymentMethodView: View {
             }
             .padding(.horizontal)
 
-            // Form fields
             VStack(alignment: .leading, spacing: 20) {
-                // Card preview usando una imagen fija
+                Spacer()
                 Image("card")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 180)
+                    .frame(height: 220)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Name on the card")
-                        .foregroundColor(.primaryColor)
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                    HStack(spacing: 6) {
+                        Image(systemName: "person")
+                            .foregroundColor(.primaryColor)
+                        Text("Name on the card")
+                            .foregroundColor(.primaryColor)
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                    }
                     TextField("Camila Williamson", text: $nameOnCard)
+                        .onChange(of: nameOnCard) { newValue in
+                            let filtered = newValue.filter { $0.isLetter || $0.isWhitespace }
+                            if filtered != newValue {
+                                nameOnCard = filtered
+                            }
+                        }
                         .font(.subheadline)
                         .padding(.vertical, 4)
                     Rectangle()
@@ -42,12 +51,24 @@ struct AddPaymentMethodView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Card number")
-                        .foregroundColor(.primaryColor)
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                    HStack(spacing: 6) {
+                        Image(systemName: "creditcard")
+                            .foregroundColor(.primaryColor)
+                        Text("Card number")
+                            .foregroundColor(.primaryColor)
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                    }
                     TextField("1234 4564 3333 0329", text: $cardNumber)
                         .keyboardType(.numberPad)
+                        .onChange(of: cardNumber) { newValue in
+                            let filtered = newValue.filter { $0.isNumber }
+                            if filtered.count <= 16 {
+                                cardNumber = filtered.chunked(by: 4).joined(separator: " ")
+                            } else {
+                                cardNumber = String(filtered.prefix(16)).chunked(by: 4).joined(separator: " ")
+                            }
+                        }
                         .font(.subheadline)
                         .padding(.vertical, 4)
                     Rectangle()
@@ -57,12 +78,25 @@ struct AddPaymentMethodView: View {
                 
                 HStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Expiry date")
-                            .foregroundColor(.primaryColor)
-                            .font(.caption)
-                            .fontWeight(.semibold)
+                        HStack(spacing: 6) {
+                            Image(systemName: "calendar")
+                                .foregroundColor(.primaryColor)
+                            Text("Expiry date")
+                                .foregroundColor(.primaryColor)
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                        }
                         TextField("06/2023", text: $expiryDate)
                             .keyboardType(.numbersAndPunctuation)
+                            .onChange(of: expiryDate) { newValue in
+                                let filtered = newValue.filter { $0.isNumber }
+                                if filtered.count > 6 { expiryDate = String(filtered.prefix(6)) }
+                                else if filtered.count > 2 {
+                                    expiryDate = "\(filtered.prefix(2))/\(filtered.suffix(from: filtered.index(filtered.startIndex, offsetBy: 2)))"
+                                } else {
+                                    expiryDate = filtered
+                                }
+                            }
                             .font(.subheadline)
                             .padding(.vertical, 4)
                         Rectangle()
@@ -71,12 +105,24 @@ struct AddPaymentMethodView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("CVC")
-                            .foregroundColor(.primaryColor)
-                            .font(.caption)
-                            .fontWeight(.semibold)
+                        HStack(spacing: 6) {
+                            Image(systemName: "lock")
+                                .foregroundColor(.primaryColor)
+                            Text("CVC")
+                                .foregroundColor(.primaryColor)
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                        }
                         TextField("333", text: $cvc)
                             .keyboardType(.numberPad)
+                            .onChange(of: cvc) { newValue in
+                                let filtered = newValue.filter { $0.isNumber }
+                                if filtered.count <= 3 {
+                                    cvc = filtered
+                                } else {
+                                    cvc = String(filtered.prefix(3))
+                                }
+                            }
                             .font(.subheadline)
                             .padding(.vertical, 4)
                         Rectangle()
@@ -84,16 +130,16 @@ struct AddPaymentMethodView: View {
                             .frame(height: 1)
                     }
                 }
+                Spacer()
             }
             .padding(.horizontal)
             
             Spacer()
             
-            // Next button
             Button(action: {
-                print("Next tapped")
+                print("Card added")
             }) {
-                Text("Next")
+                Text("Add")
                     .foregroundColor(.cream)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
@@ -107,6 +153,16 @@ struct AddPaymentMethodView: View {
         }
         .padding(.top)
         .background(Color.cream.edgesIgnoringSafeArea(.all))
+    }
+}
+
+extension String {
+    func chunked(by length: Int) -> [String] {
+        stride(from: 0, to: count, by: length).map {
+            let start = index(startIndex, offsetBy: $0)
+            let end = index(start, offsetBy: length, limitedBy: endIndex) ?? endIndex
+            return String(self[start..<end])
+        }
     }
 }
 
