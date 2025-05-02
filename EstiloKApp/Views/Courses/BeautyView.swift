@@ -1,49 +1,69 @@
 import SwiftUI
 
-enum BeautyTab: String, CaseIterable {
-    case courses = "Courses"
-    case experts = "Experts"
-    case events = "Events"
-}
-
-struct BeautyView: View {
-    @State private var selectedTab: BeautyTab = .courses
+struct BeautyMainView: View {
+    @State private var selectedTab = "Courses"
+    let tabs = ["Courses", "Experts", "Events"]
 
     var body: some View {
-        VStack {
-            HStack(spacing: 20) {
-                ForEach(BeautyTab.allCases, id: \.self) { tab in
-                    Button(action: { selectedTab = tab }) {
-                        Text(tab.rawValue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(selectedTab == tab ? Color.primaryColor : Color.secondaryColor.opacity(0.2))
-                            .cornerRadius(20)
-                            .shadow(color: .black.opacity(selectedTab == tab ? 0.1 : 0), radius: 4, x: 0, y: 2)
-                            .foregroundColor(.black)
+        VStack(alignment: .leading, spacing: 16) {
+            // HEADER
+            HStack {
+                Text("Beauty")
+                    .font(.largeTitle)
+                    .bold()
+
+                Spacer()
+
+                Image(systemName: "magnifyingglass")
+                    .font(.title2)
+            }
+            .padding(.horizontal)
+
+            // TABS
+            HStack(spacing: 16) {
+                ForEach(tabs, id: \.self) { tab in
+                    Button(action: {
+                        selectedTab = tab
+                    }) {
+                        Text(tab)
+                            .fontWeight(.semibold)
+                            .foregroundColor(selectedTab == tab ? .white : .carbon)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 8)
+                            .background(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(selectedTab == tab ? Color.primaryColor : Color.lightGray)
+                                    .shadow(color: Color.blue.opacity(0.25), radius: 10, x: 0, y: 4)
+                            )
                     }
                 }
             }
             .padding(.horizontal)
-            .padding(.top)
+
+            // CONTENT
+            Group {
+                if selectedTab == "Courses" {
+                    CoursesView()
+                } else if selectedTab == "Experts" {
+                    ExpertsView()
+                } else if selectedTab == "Events" {
+                    EventsView()
+                }
+            }
+            .padding(.horizontal)
+            .padding(.top, 10)
 
             Spacer()
-
-            switch selectedTab {
-            case .courses:
-                CoursesView()
-            case .experts:
-                ExpertsView()
-            case .events:
-                EventsView()
-            }
         }
+        .padding(.top) // ensures everything stays at the top
     }
 }
 
-struct BeautyView_Previews: PreviewProvider {
+
+struct BeautyMainView_Previews: PreviewProvider {
     static var previews: some View {
-        BeautyView()
+        BeautyMainView()
+            .previewLayout(.sizeThatFits)
     }
 }
 
