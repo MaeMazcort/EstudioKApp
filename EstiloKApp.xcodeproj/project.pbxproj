@@ -151,6 +151,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A56E86272DC520E60057AD34 /* Appointment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Appointment; sourceTree = "<group>"; };
 		A5C90ED02D9D27F000E322EE /* Images */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Images; sourceTree = "<group>"; };
 		A5C90ED12D9D581F00E322EE /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
 		A5C90ED42D9D869F00E322EE /* Restaurant */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Restaurant; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 		061572B52B9246C8002F6ADD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A56E86272DC520E60057AD34 /* Appointment */,
 				AB04D63D2DC477EF00B4BFEF /* Payment */,
 				AB04D5FD2DC40E0000B4BFEF /* Onboarding */,
 				ABA417B82D9E1B6600980862 /* Map */,
@@ -399,6 +401,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				A56E86272DC520E60057AD34 /* Appointment */,
 				A5C90ED02D9D27F000E322EE /* Images */,
 				A5C90ED12D9D581F00E322EE /* Search */,
 				A5C90ED42D9D869F00E322EE /* Restaurant */,
