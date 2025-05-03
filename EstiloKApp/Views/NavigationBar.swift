@@ -16,8 +16,7 @@ struct NavigationBar: View {
                 .tag(0)
             
         
-            // Cart Tab
-            Text("Shopping Cart")
+            CartView()
                 .tabItem {
                     Image(systemName: "cart")
                     Text("Cart")
