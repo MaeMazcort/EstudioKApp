@@ -54,7 +54,6 @@ struct BeautyMainView: View {
                         EventsView()
                     }
                 }
-                .padding(.horizontal)
                 .padding(.top, selectedTab != "Detail" ? 10 : 0)
 
                 Spacer()
