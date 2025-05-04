@@ -31,11 +31,10 @@ struct NavigationBar: View {
                 .tag(2)
             
             
-            // Chat/Messages Tab
-            Text("Messages")
+            BeautyMainView()
                 .tabItem {
-                    Image(systemName: "message")
-                    Text("Messages")
+                    Image(systemName: "wand.and.stars")
+                    Text("Beauty")
                 }
                 .tag(3)
             

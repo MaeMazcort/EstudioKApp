@@ -22,9 +22,7 @@ struct ConfirmOrderView: View {
                 VStack(spacing: 24) {
                     // HEADER
                     HStack {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.carbon)
-                        Spacer()
+                        
                         Text("Confirm your order")
                             .font(.title3)
                             .fontWeight(.semibold)
@@ -210,6 +208,7 @@ struct ConfirmOrderView: View {
                     }
                 }
             }
+            .accentColor(Color.primaryColor)
             .background(Color.cream.edgesIgnoringSafeArea(.all))
         }
     }
