@@ -10,7 +10,7 @@ struct Products: View {
     let sellerRating: Double = 4.8
     let ordersCount: Int = 750
 
-    @State private var quantity: Int = 1
+    @State private var quantity: Int = 0
     @State private var isFavorite: Bool = false
     @Environment(\.dismiss) private var dismiss
 
@@ -43,8 +43,7 @@ struct Products: View {
                         if UIImage(named: productImageName) != nil {
                             Image(productImageName)
                                 .resizable()
-                                .scaledToFit()
-                                .frame(height: 300)
+                                .frame(height: 250)
                         } else {
                             // Fallback image if image is missing
                             Rectangle()
@@ -177,37 +176,36 @@ struct Products: View {
                     }
                     .padding()
                 }
-            }
+                
+                //Add to Cart Button
+                HStack(spacing: 10) {
+                    Button(action: {
+                        // Add to cart action
+                    }) {
+                        Text("Add to cart")
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.cream)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.carbon)
+                            .cornerRadius(10)
+                    }
 
-            // Footer - Add to Cart Button
-            HStack(spacing: 10) {
-                Button(action: {
-                    // Add to cart action
-                }) {
-                    Text("Add to cart")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.cream)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.carbon)
-                        .cornerRadius(10)
+                    Button(action: {
+                        // Chat action
+                    }) {
+                        Image(systemName: "message.fill")
+                            .font(.title2)
+                            .foregroundColor(.cream)
+                            .frame(width: 50, height: 50)
+                            .background(Color.carbon)
+                            .cornerRadius(10)
+                    }
                 }
-
-                Button(action: {
-                    // Chat action
-                }) {
-                    Image(systemName: "message.fill")
-                        .font(.title2)
-                        .foregroundColor(.cream)
-                        .frame(width: 50, height: 50)
-                        .background(Color.carbon)
-                        .cornerRadius(10)
-                }
+                .padding()
+                .background(Color.cream)
             }
-            .padding()
-            .background(Color.cream)
-            .shadow(color: Color.gray.opacity(0.05), radius: 5, x: 0, y: -5)
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(true)
