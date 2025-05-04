@@ -9,14 +9,14 @@ struct UserData {
     var age: Int = 0
 }
 
-
 struct SignUpView: View {
     @State public var user = UserData()
     @State private var confirmPassword = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isShowingSignIn = false
-    
+    @State private var isShowingHome = false
+
     public var databaseRef: DatabaseReference = Database.database().reference()
 
     var body: some View {
@@ -32,7 +32,7 @@ struct SignUpView: View {
                         FormTextField(label: "Name", text: $user.firstName)
                         FormTextField(label: "Email", text: Binding(
                             get: { user.email },
-                            set: { user.email = $0.lowercased() }
+                            set: { user.email = $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
                         ))
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
@@ -64,7 +64,11 @@ struct SignUpView: View {
                     .navigationDestination(isPresented: $isShowingSignIn) {
                         SignInView()
                     }
+                    .navigationDestination(isPresented: $isShowingHome) {
+                        NavigationBar()
+                    }
                     .navigationBarBackButtonHidden(true)
+
                     HStack {
                         Text("Or Sign up with")
                             .foregroundColor(.gray)
@@ -95,23 +99,23 @@ struct SignUpView: View {
         }
         .accentColor(.primaryColor)
     }
-        
+
     private func registerUser() {
         guard !user.password.isEmpty, user.password == confirmPassword else {
             alertMessage = "Passwords don't match"
             showAlert = true
             return
         }
-        
+
         Auth.auth().createUser(withEmail: user.email, password: user.password) { authResult, error in
             if let error = error {
                 alertMessage = "Error: \(error.localizedDescription)"
                 showAlert = true
                 return
             }
-            
+
             guard let userID = authResult?.user.uid else { return }
-            
+
             let userData = [
                 "firstName": user.firstName,
                 "email": user.email
@@ -121,9 +125,13 @@ struct SignUpView: View {
                 if let error = error {
                     alertMessage = "Database error: \(error.localizedDescription)"
                     showAlert = true
+                } else {
+                    // Limpia los campos después del registro
+                    self.user = UserData()
+                    self.confirmPassword = ""
+                    isShowingHome = true
                 }
             }
-            
         }
     }
 }
@@ -139,12 +147,13 @@ struct FormTextField: View {
             Text(label)
                 .font(.subheadline)
                 .foregroundColor(.gray)
-            TextField(label, text: $text) 
+            TextField(label, text: $text)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.4)))
         }
     }
 }
+
 struct FormSecureField: View {
     let label: String
     @Binding var text: String
@@ -196,6 +205,8 @@ struct SocialButton: View {
         }
     }
 }
+
 #Preview {
     SignUpView()
 }
+

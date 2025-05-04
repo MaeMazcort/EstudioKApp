@@ -8,10 +8,10 @@ struct NavigationBar: View {
         // Eliminamos el NavigationView anidado del TabView
         TabView(selection: $selectedTab) {
             // Favorites/Heart Tab
-            SocialGeneralView()
+            BookAppointmentView()
                 .tabItem {
-                    Image(systemName: "heart")
-                    Text("Favorites")
+                    Image(systemName: "calendar")
+                    Text("Appoinments")
                 }
                 .tag(0)
             
