@@ -9,6 +9,10 @@ struct Product: Identifiable {
 
 struct HomeView: View {
     @State private var selectedProduct: Product?
+    @State private var navigateToBookAppointment = false
+    @State private var navigateToNotifications = false
+    @State private var buttonPosition = CGPoint(x: UIScreen.main.bounds.width - 60, y: 120)
+        
     
     let popularProducts = [
         Product(name: "Grapeseed Oil", price: "$259.00", imageName: "oil"),
@@ -36,89 +40,115 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Welcome Andrea")
-                                .font(.title2)
-                                .bold()
-                            Text("Limon!")
-                                .font(.title2)
-                                .bold()
+            ZStack {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Welcome Andrea")
+                                    .font(.title2)
+                                    .bold()
+                                Text("Limon!")
+                                    .font(.title2)
+                                    .bold()
+                            }
+                            Spacer()
+                            Button(action: {
+                                navigateToNotifications = true
+                            }) {
+                                Image(systemName: "bell")
+                                    .font(.title2)
+                                    .foregroundColor(.primary)
+                            }
                         }
-                        Spacer()
-                        Image(systemName: "bell")
-                            .font(.title2)
-                    }
-                    .padding(.horizontal)
-
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .padding(.leading, 15)
-                        
-                        TextField("What can we offer you?", text: .constant(""))
-                            .padding(10)
-                            .padding(.trailing, 10)
-                        
-                        Spacer()
-                    }
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-
-                    ZStack {
-                        Image("promoBanner")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 120)
-                            .clipped()
-                            .cornerRadius(20)
+                        .padding(.horizontal)
 
                         HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .padding(.leading, 15)
+                            
+                            TextField("What can we offer you?", text: .constant(""))
+                                .padding(10)
+                                .padding(.trailing, 10)
+                            
                             Spacer()
-                            VStack(alignment: .trailing, spacing: 10) {
-                                Text("50% off special\ndeal in February")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .multilineTextAlignment(.trailing)
-
-                                Button(action: {}) {
-                                    Text("Buy now")
-                                        .fontWeight(.bold)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 10)
-                                        .background(Color.white)
-                                        .foregroundColor(.black)
-                                        .cornerRadius(15)
-                                }
-                            }
-                            .padding()
                         }
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                    .frame(height: 150)
-                    .padding(.horizontal)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
 
-                    ProductSection(title: "Popular this week!", products: popularProducts, selectedProduct: $selectedProduct)
-                    ProductSection(title: "On Sale", products: onSaleProducts, selectedProduct: $selectedProduct)
-                    ProductSection(title: "Buy again", products: buyAgain, selectedProduct: $selectedProduct)
-                    ProductSection(title: "Specially for you", products: recommended, selectedProduct: $selectedProduct)
+                        ZStack {
+                            Image("promoBanner")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: 120)
+                                .clipped()
+                                .cornerRadius(20)
+
+                            HStack {
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 10) {
+                                    Text("50% off special\ndeal in February")
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.trailing)
+
+                                    Button(action: {}) {
+                                        Text("Buy now")
+                                            .fontWeight(.bold)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 10)
+                                            .background(Color.white)
+                                            .foregroundColor(.black)
+                                            .cornerRadius(15)
+                                    }
+                                }
+                                .padding()
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                        .frame(height: 150)
+                        .padding(.horizontal)
+
+                        ProductSection(title: "Popular this week!", products: popularProducts, selectedProduct: $selectedProduct)
+                        ProductSection(title: "On Sale", products: onSaleProducts, selectedProduct: $selectedProduct)
+                        ProductSection(title: "Buy again", products: buyAgain, selectedProduct: $selectedProduct)
+                        ProductSection(title: "Specially for you", products: recommended, selectedProduct: $selectedProduct)
+                    }
+                    .background(
+                        NavigationLink(
+                            destination: selectedProduct.map { product in
+                                let priceString = product.price.dropFirst()
+                                let priceDouble = Double(priceString) ?? 0.0
+                                return Products(productImageName: product.imageName, productName: product.name, price: priceDouble)
+                            },
+                            isActive: Binding(
+                                get: { selectedProduct != nil },
+                                set: { isActive in if !isActive { selectedProduct = nil } }
+                            )
+                        ) { EmptyView() }
+                    )
+                    .background(
+                        NavigationLink(
+                            destination: BookAppointmentView(),
+                            isActive: $navigateToBookAppointment
+                        ) { EmptyView() }
+                    )
+                    .background(
+                        NavigationLink(
+                            destination: NotificationsView(),
+                            isActive: $navigateToNotifications
+                        ) { EmptyView() }
+                    )
                 }
-                .background(
-                    NavigationLink(
-                        destination: selectedProduct.map { product in
-                            let priceString = product.price.dropFirst()
-                            let priceDouble = Double(priceString) ?? 0.0
-                            return Products(productImageName: product.imageName, productName: product.name, price: priceDouble)
-                        },
-                        isActive: Binding(
-                            get: { selectedProduct != nil },
-                            set: { isActive in if !isActive { selectedProduct = nil } }
-                        )
-                    ) { EmptyView() }
+                
+                // Botón flotante de calendario movible
+                DraggableFloatingButton(
+                    position: $buttonPosition,
+                    action: { navigateToBookAppointment = true },
+                    icon: "calendar"
                 )
             }
             .navigationBarHidden(true)
@@ -174,7 +204,44 @@ struct ProductSection: View {
         .padding(.top)
     }
 }
+
+// Botón flotante arrastrable
+struct DraggableFloatingButton: View {
+    @Binding var position: CGPoint
+    var action: () -> Void
+    var icon: String
+    @State private var isDragging = false
+    
+    var body: some View {
+        Image(systemName: icon)
+            .font(.system(size: 24))
+            .foregroundColor(.white)
+            .frame(width: 60, height: 60)
+            .background(Color.primaryColor)
+            .clipShape(Circle())
+            .shadow(radius: isDragging ? 8 : 5)
+            .scaleEffect(isDragging ? 1.1 : 1.0)
+            .position(position)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        isDragging = true
+                        position = value.location
+                    }
+                    .onEnded { _ in
+                        isDragging = false
+                    }
+            )
+            .simultaneousGesture(
+                TapGesture()
+                    .onEnded {
+                        action()
+                    }
+            )
+            .animation(.spring(), value: isDragging)
+    }
+}
+
 #Preview {
     HomeView()
 }
-
