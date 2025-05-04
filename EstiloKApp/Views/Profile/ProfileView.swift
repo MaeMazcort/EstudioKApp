@@ -1,414 +1,168 @@
 import SwiftUI
-import Charts
-import MapKit
-import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 struct ProfileView: View {
-    @State private var isShowingSettings = false
-    @State private var userName: String = "Loading..."
-    @State private var userEmail: String = ""
-    @State private var userAge: Int = 0
-    @State private var isShowingVisitRest = false
-    
-    let visitedPlaces = [
-        Restaurants(name: "McDonald's", description: "Fast food chain with burgers and fries.", image: Image("restaurant1"), location: CLLocationCoordinate2D(latitude: 19.0610, longitude: -98.3062), menu: [], visitedBy: [], reviews: []),
-        Restaurants(name: "Little Caesars", description: "Pizza restaurant known for Hot-N-Ready.", image: Image("restaurant2"), location: CLLocationCoordinate2D(latitude: 19.0620, longitude: -98.3050), menu: [], visitedBy: [], reviews: []),
-        Restaurants(name: "KFC", description: "Famous for fried chicken and sides.", image: Image("restaurant3"), location: CLLocationCoordinate2D(latitude: 19.0630, longitude: -98.3040), menu: [], visitedBy: [], reviews: [])
+    @State private var userName: String = "Loading..."  // Nombre del usuario
+    @State private var userImageUrl: String = ""  // URL de la imagen del perfil
+
+    let buyAgain = [
+        Product(name: "Livingproof Kit", price: "$259.00", imageName: "kit"),
+        Product(name: "Eco Conditioner", price: "$179.00", imageName: "conditioner"),
+        Product(name: "Sunflower Serum", price: "$99.00", imageName: "serum")
     ]
     
+    // Cargar los datos del usuario desde Firebase Realtime Database
+    func loadUserProfile() {
+        if let user = Auth.auth().currentUser {
+            let ref = Database.database().reference()
+            let userRef = ref.child("users").child(user.uid)
+            
+            userRef.observeSingleEvent(of: .value) { snapshot in
+                if let value = snapshot.value as? [String: Any] {
+                    // Recuperar el nombre y la URL de la imagen del perfil
+                    self.userName = value["firstName"] as? String ?? "No Name"
+                    self.userImageUrl = value["profileImageUrl"] as? String ?? ""
+                } else {
+                    print("No data available or error fetching data.")
+                }
+            }
+        }
+    }
+    
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    NavigationLink(destination: SettingsView(), isActive: $isShowingSettings) { EmptyView() }
-                    
-                    // Profile Header
-                    VStack(spacing: 8) {
+        NavigationStack {
+            VStack(spacing: 0) {
+                // Encabezado
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Welcome Back,")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+
+                        Text(userName)  // Muestra el nombre del usuario
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.carbon)
+                    }
+
+                    Spacer()
+
+                    if !userImageUrl.isEmpty {
+                        // Si tenemos la URL de la imagen, la mostramos
+                        AsyncImage(url: URL(string: userImageUrl)) { image in
+                            image.resizable()
+                                 .scaledToFill()
+                                 .clipShape(Circle())
+                                 .overlay(Circle().stroke(Color.primaryColor, lineWidth: 2))
+                        } placeholder: {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                        }
+                        .frame(width: 60, height: 60)
+                    } else {
                         Image(systemName: "person.circle.fill")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 100)
-                            .foregroundColor(.primaryColor)
-                        
-                        Text("\(userName)")
-                            .font(.title)
-                            .fontWeight(.bold)
-                        
-                        Text(userEmail)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .frame(width: 60, height: 60)
                     }
-                    .padding(.top, 20)
-                    
-                    // Personal details
-                    GroupBox(label: Label("About Me", systemImage: "person.text.rectangle")
-                                .foregroundColor(.primaryColor)) {
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack {
-                                Image(systemName: "envelope.fill")
-                                    .foregroundColor(.primaryColor)
-                                    .frame(width: 20)
-                                Text(userEmail)
-                                    .font(.callout)
-                            }
-                            
-                            HStack {
-                                Image(systemName: "calendar")
-                                    .foregroundColor(.primaryColor)
-                                    .frame(width: 20)
-                                Text("\(userAge) years")
-                                    .font(.callout)
-                            }
-                            
-                            HStack {
-                                Image(systemName: "location.fill")
-                                    .foregroundColor(.primaryColor)
-                                    .frame(width: 20)
-                                Text("Puebla, MX")
-                                    .font(.callout)
-                            }
-                        }
-                        .padding(.vertical, 8)
-                    }
-                    .padding(.horizontal)
-                    
-                    // Achievements Section
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Achievements")
+                }
+                .padding()
+
+                Divider()
+                    .background(Color.gray.opacity(0.2))
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        // Historial de compras
+                        Text("Buy Again")
                             .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.leading, 16)
-                        
+                            .fontWeight(.semibold)
+                            .foregroundColor(.carbon)
+                            .padding(.horizontal)
+
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                AchievementView(icon: "figure.walk", text: "10,000\nSteps", color: .white)
-                                AchievementView2(icon: "leaf.fill", text: "Vegan for\na Week", color: .white)
-                                AchievementView3(icon: "fork.knife", text: "Tried 50\nDishes", color: .white)
-                                AchievementView4(icon: "cup.and.saucer.fill", text: "Coffee\nEnthusiast", color: .white)
-                                AchievementView5(icon: "figure.wave", text: "Morning\nWalker", color: .white)
-                                AchievementView6(icon: "shoeprints.fill", text: "Trail\nExpert", color: .white)
-                                AchievementView7(icon: "signpost.right.fill", text: "Route\nExplorer", color: .white)
-                                AchievementView8(icon: "map.circle.fill", text: "Full Route\nCompletion", color: .white)
+                            HStack(spacing: 15) {
+                                ForEach(buyAgain, id: \.name) { product in
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Image(product.imageName)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 120, height: 120)
+                                            .background(Color.secondaryColor)
+                                            .cornerRadius(12)
 
+                                        Text(product.name)
+                                            .font(.subheadline)
+                                            .foregroundColor(.carbon)
+                                            .lineLimit(1)
 
+                                        Text(product.price)
+                                            .font(.subheadline)
+                                            .foregroundColor(.primaryColor)
+                                    }
+                                    .frame(width: 120)
+                                }
                             }
                             .padding(.horizontal)
                         }
-                    }
-                    
-                    HStack {
-                        SocialCardView(title: "Visited Restaurants", icon: "fork.knife") {
-                            VStack(spacing: 12) {
-                                HStack {
-                                    ActivityCard(
-                                        username: "\(userName)",
-                                        action: "Visited",
-                                        target: "McDonald's",
-                                        icon: "m.circle.fill",
-                                        color: .yellow,
-                                        restaurant: visitedPlaces[0],
-                                        userLocation: visitedPlaces[0].location
-                                    )
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.secondaryColor)
-                                }
-                                HStack {
-                                    ActivityCard(
-                                        username: "\(userName)",
-                                        action: "Visited",
-                                        target: "Little Caesars",
-                                        icon: "flame.fill",
-                                        color: .darkorange,
-                                        restaurant: visitedPlaces[1],
-                                        userLocation: visitedPlaces[1].location
-                                    )
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.secondaryColor)
-                                }
-                                HStack {
-                                    ActivityCard(
-                                        username: "\(userName)",
-                                        action: "Visited",
-                                        target: "KFC",
-                                        icon: "leaf.fill",
-                                        color: .red,
-                                        restaurant: visitedPlaces[2],
-                                        userLocation: visitedPlaces[2].location
-                                    )
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.secondaryColor)
-                                }
-                                HStack {
-                                    NavigationLink(destination: VisitedRestaurantsView()) {
-                                                                           Text("View All")
-                                                                               .foregroundColor(.secondaryColor)
-                                                                               .font(.title3)
-                                                                       }
-                                }
+
+                        // Opciones adicionales
+                        VStack(spacing: 16) {
+                            ProfileOptionRow(title: "My Orders", icon: "bag.fill")
+                            ProfileOptionRow(title: "Favorites", icon: "heart.fill")
+                            
+                            // Redirigir a SettingsView
+                            NavigationLink(destination: SettingsView()) {
+                                ProfileOptionRow(title: "Settings", icon: "gear")
                             }
+                            
+                            ProfileOptionRow(title: "Help Center", icon: "questionmark.circle")
                         }
-                       
-                        .foregroundColor(.blue)
-                        .font(.subheadline)
+                        .padding(.horizontal)
                     }
-                    .padding(.top, 20)
-
+                    .padding(.top)
                 }
-                
-                
+                .background(Color.cream.ignoresSafeArea())
             }
-            .navigationBarItems(trailing: Button(action: {
-                isShowingSettings = true
-            }) {
-                Image(systemName: "gear")
-                    .font(.system(size: 20))
-            })
-            .navigationBarTitle("My Profile", displayMode: .inline)
-            .navigationDestination(isPresented: $isShowingVisitRest) {
-                VisitedRestaurantsView()
+            .onAppear {
+                loadUserProfile()  // Cargar el perfil cuando la vista aparece
             }
-        }
-        .navigationBarBackButtonHidden(true)
-        .accentColor(Color.primaryColor)
-        .onAppear {
-            fetchUserDataFromDatabase()
-        }
-    }
-    
-    private func fetchUserDataFromDatabase() {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("No authenticated user")
-            userName = "Guest"
-            return
-        }
-        
-        let dbRef = Database.database().reference()
-        dbRef.child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
-            if let userData = snapshot.value as? [String: Any] {
-                DispatchQueue.main.async {
-                    self.userName = userData["firstName"] as? String ?? "User"
-                    self.userEmail = userData["email"] as? String ?? "No email"
-                    self.userAge = userData["age"] as? Int ?? 0
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.userName = "User"
-                    self.userEmail = Auth.auth().currentUser?.email ?? "No email"
-                }
-            }
+            .navigationTitle("Profile")
+            .navigationBarHidden(true)
+            .background(Color.cream)
         }
     }
 }
 
-// Achievement Views (keep your existing implementations)
-struct AchievementView: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
+struct ProfileOptionRow: View {
+    var title: String
+    var icon: String
+
     var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.mustardYellow)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.primaryColor)
+                .frame(width: 30)
+
+            Text(title)
+                .foregroundColor(.carbon)
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(color: Color.gray.opacity(0.05), radius: 5, x: 0, y: 2)
     }
 }
 
-struct AchievementView2: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.deepBlue)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-struct AchievementView3: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.opaqueRed)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-struct AchievementView4: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.lightGreen)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-struct AchievementView5: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.purple)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-struct AchievementView6: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.cyan)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-struct AchievementView7: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.orange)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-struct AchievementView8: View {
-    let icon: String
-    let text: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            ZStack {
-                Circle()
-                    .fill(Color.indigo)
-                    .frame(width: 60, height: 60)
-                Image(systemName: icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color)
-            }
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-
-// Preview
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
+#Preview {
+    ProfileView()
 }
 

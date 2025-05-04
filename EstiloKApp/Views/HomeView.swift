@@ -1,4 +1,7 @@
 import SwiftUI
+import FirebaseAuth
+import FirebaseDatabase
+
 
 struct Product: Identifiable {
     var id = UUID()
@@ -12,7 +15,7 @@ struct HomeView: View {
     @State private var navigateToBookAppointment = false
     @State private var navigateToNotifications = false
     @State private var buttonPosition = CGPoint(x: UIScreen.main.bounds.width - 60, y: 120)
-        
+    @State private var userName: String = "Loading..." // Nombre del usuario
     
     let popularProducts = [
         Product(name: "Grapeseed Oil", price: "$259.00", imageName: "oil"),
@@ -37,6 +40,26 @@ struct HomeView: View {
         Product(name: "ESPA Cream", price: "$145.00", imageName: "espa"),
         Product(name: "Buttah Hair Lotion", price: "$199.00", imageName: "buttah")
     ]
+    
+    
+    func fetchUserName() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("No user is logged in.")
+            return
+        }
+        let ref = Database.database().reference()
+        
+        ref.child("users").child(userId).observeSingleEvent(of: .value) { snapshot in
+            if let value = snapshot.value as? [String: Any],
+               let firstName = value["firstName"] as? String {
+                self.userName = firstName
+                print("User first name: \(firstName)")              } else {
+                self.userName = "User"
+                print("No first name found for user.")
+            }
+        }
+
+    }
 
     var body: some View {
         NavigationView {
@@ -45,10 +68,7 @@ struct HomeView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Welcome Andrea")
-                                    .font(.title2)
-                                    .bold()
-                                Text("Limon!")
+                                Text("Welcome \(userName)") // Nombre dinámico
                                     .font(.title2)
                                     .bold()
                             }
@@ -152,6 +172,9 @@ struct HomeView: View {
                 )
             }
             .navigationBarHidden(true)
+            .onAppear {
+                fetchUserName() // Llamar para obtener el nombre
+            }
         }
     }
 }
@@ -245,3 +268,4 @@ struct DraggableFloatingButton: View {
 #Preview {
     HomeView()
 }
+

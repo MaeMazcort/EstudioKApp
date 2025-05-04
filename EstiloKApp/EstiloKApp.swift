@@ -17,6 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct EstiloKApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var cartEnvironment = CartEnvironment.shared
     init(){
         let appearance = UINavigationBarAppearance()
                 appearance.configureWithOpaqueBackground()
@@ -31,6 +32,7 @@ struct EstiloKApp: App {
     var body: some Scene {
         WindowGroup {
             LogInView()
+               .environmentObject(CartEnvironment.shared)
         }
     }
 }
