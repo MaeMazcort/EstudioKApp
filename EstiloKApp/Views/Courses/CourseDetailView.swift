@@ -12,44 +12,34 @@ struct CourseDetailView: View {
     let hasUnlimitedAccess: Bool
     let description: String
     let color: Color
+    let courseImage: String
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                // Header
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(title)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding(.top, 40)
-                        .padding(.horizontal)
-                    Spacer()
-                }
-                .frame(height: 80)
-                .frame(maxWidth: .infinity)
-                .background(color)
-                .clipShape(RoundedCorner(radius: 20, corners: [.bottomRight]))
+
+                // Course Image
+                Image(courseImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 200)
+                    .frame(maxWidth: .infinity)
+                    .clipped()
+                    .cornerRadius(20)
+                    .padding(.horizontal)
 
                 // Price and Rating
                 VStack(alignment: .leading, spacing: 12) {
                     Text("$\(price)")
                         .font(.title)
                         .bold()
+                        .foregroundColor(.carbon)
 
                     HStack(spacing: 6) {
                         ForEach(0..<5) { index in
                             Image(systemName: index < rating ? "star.fill" : "star")
                                 .foregroundColor(.primaryColor)
                         }
-
-                        Text(tag)
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Color.cream)
-                            .cornerRadius(20)
-                            .shadow(color: .blue.opacity(0.15), radius: 10, x: 0, y: 4)
 
                         Spacer()
 
@@ -58,7 +48,17 @@ struct CourseDetailView: View {
                         Text("\(students) students")
                             .font(.subheadline)
                             .bold()
+                            .foregroundColor(.carbon)
                     }
+
+                    Text(tag)
+                        .font(.caption)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Color.cream)
+                        .cornerRadius(20)
+                        .shadow(color: .blue.opacity(0.15), radius: 10, x: 0, y: 4)
                 }
                 .padding(.horizontal)
 
@@ -106,8 +106,12 @@ struct CourseDetailView: View {
                 .padding(.bottom, 32)
             }
         }
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
+        .tint(.black)
     }
 }
+
 
 struct CourseDetailView_Previews: PreviewProvider {
     static var previews: some View {
@@ -122,7 +126,8 @@ struct CourseDetailView_Previews: PreviewProvider {
             hasCertificate: true,
             hasUnlimitedAccess: true,
             description: "Become an expert in professional makeup. You’ll learn cutting-edge techniques, use of quality products and application for different events and occasions.",
-            color: .carbon
+            color: .carbon,
+            courseImage: "photo" // system image name for preview, replace with your asset name
         )
     }
 }

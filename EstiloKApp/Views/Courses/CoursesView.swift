@@ -1,10 +1,8 @@
 import SwiftUI
 
-import SwiftUI
-
 struct CoursesView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
                     NavigationLink {
@@ -19,7 +17,8 @@ struct CoursesView: View {
                             hasCertificate: true,
                             hasUnlimitedAccess: true,
                             description: "Become an expert in professional makeup. You’ll learn cutting-edge techniques, use of quality products and application for different events and occasions.",
-                            color: .carbon
+                            color: .carbon,
+                            courseImage: "conditioner"
                         )
                     } label: {
                         CourseCardView(title: "Professional Makeup", rating: 4, reviews: 182, price: 120, tag: "Make up", color: .carbon)
@@ -37,7 +36,8 @@ struct CoursesView: View {
                             hasCertificate: true,
                             hasUnlimitedAccess: true,
                             description: "Learn techniques for skin rejuvenation, hydration and facial massage using high-quality skincare products.",
-                            color: .primaryColor
+                            color: .primaryColor,
+                            courseImage: "facial_image"
                         )
                     } label: {
                         CourseCardView(title: "Facial Treatments", rating: 3, reviews: 145, price: 95, tag: "Facial", color: .primaryColor)
@@ -55,7 +55,8 @@ struct CoursesView: View {
                             hasCertificate: true,
                             hasUnlimitedAccess: true,
                             description: "Master acrylic nail design with step-by-step guidance on shapes, trends and safe application.",
-                            color: .carbon
+                            color: .carbon,
+                            courseImage: "nails_image"
                         )
                     } label: {
                         CourseCardView(title: "Acrylic Nail Techniques", rating: 5, reviews: 211, price: 135, tag: "Nails", color: .carbon)
@@ -63,11 +64,11 @@ struct CoursesView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Beauty")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
+
 
 
 struct CourseCardView: View {
@@ -102,6 +103,7 @@ struct CourseCardView: View {
                 Text("$\(price)")
                     .font(.title3)
                     .bold()
+                    .foregroundColor(.carbon)
             }
             .padding(.horizontal)
 
@@ -109,12 +111,14 @@ struct CourseCardView: View {
             HStack {
                 Text(tag)
                     .font(.caption)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
+                    .foregroundColor(.carbon)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .background(Color.cream)
                     .cornerRadius(20)
                     .shadow(color: Color.carbon.opacity(0.3), radius: 10, x: 0, y: 4)
+
                 Spacer()
             }
             .padding(.horizontal)
