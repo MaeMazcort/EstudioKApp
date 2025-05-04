@@ -33,73 +33,80 @@ class Cart: ObservableObject {
     }
 }
 
-
 struct CartView: View {
     @StateObject private var cart = Cart()
-    
+    @State private var goToConfirm = false
+
     var body: some View {
-        VStack(spacing: 0) {
-            // Header
-            HStack {
-                Button(action: {
-                    // Back button action
-                }) {
-                    Image(systemName: "chevron.left")
+        NavigationStack {
+            VStack(spacing: 0) {
+                // Header
+                HStack {
+                    Button(action: {
+                        // Back button action
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(.brown)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("Your Cart")
                         .font(.title2)
+                        .fontWeight(.bold)
                         .foregroundColor(.brown)
-                }
-                
-                Spacer()
-                
-                Text("Your Cart")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.brown)
-                
-                Spacer()
-                
-                Button(action: {
-                    // Notification button action
-                }) {
-                    Image(systemName: "bell")
-                        .font(.title2)
-                        .foregroundColor(.brown)
-                }
-            }
-            .padding()
-            
-            // Product list
-            ScrollView {
-                LazyVStack(spacing: 16) {
-                    ForEach(cart.items) { item in
-                        CartItemRow(item: item, incrementAction: {
-                            cart.incrementQuantity(for: item)
-                        }, decrementAction: {
-                            cart.decrementQuantity(for: item)
-                        })
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // Notification button action
+                    }) {
+                        Image(systemName: "bell")
+                            .font(.title2)
+                            .foregroundColor(.brown)
                     }
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
+                .padding()
+                
+                // Product list
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(cart.items) { item in
+                            CartItemRow(item: item, incrementAction: {
+                                cart.incrementQuantity(for: item)
+                            }, decrementAction: {
+                                cart.decrementQuantity(for: item)
+                            })
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                }
+                
+                // Confirmation button
+                Button(action: {
+                    goToConfirm = true
+                }) {
+                    Text("Go to pay")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.cream)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.carbon)
+                        .cornerRadius(20)
+                        .padding(.horizontal, 40)
+                }
+                .padding(.vertical, 10)
+                
+                // NavigationLink oculto
+                NavigationLink(destination: ConfirmOrderView(), isActive: $goToConfirm) {
+                    EmptyView()
+                }
             }
-            
-            // Confirmation button
-            Button(action: {
-                // Order confirmation action
-            }) {
-                Text("Confirm order")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.cream)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.carbon)
-                    .cornerRadius(20)
-                    .padding(.horizontal, 40)
-            }
-            .padding(.vertical, 10)
+            .background(Color.cream)
         }
-        .background(Color.cream)
     }
 }
 
@@ -110,14 +117,12 @@ struct CartItemRow: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            // Product image
             Image(item.imageUrl)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 60)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
-            // Product info
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.name)
                     .font(.headline)
@@ -163,6 +168,7 @@ struct CartItemRow: View {
         .shadow(color: Color.carbon.opacity(0.05), radius: 2, x: 0, y: 2)
     }
 }
+
 
 #Preview {
     CartView()
