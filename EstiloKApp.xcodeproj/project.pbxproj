@@ -76,6 +76,8 @@
 		E4189CD72D9DA3DF005FA7C0 /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = E4189CD62D9DA3DF005FA7C0 /* FirebaseVertexAI */; };
 		E4189D432D9E1F35005FA7C0 /* VisitedRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189D422D9E1F29005FA7C0 /* VisitedRestaurantsView.swift */; };
 		E443C2DE2DC4293100FA7B45 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443C2DD2DC4293100FA7B45 /* SignIn.swift */; };
+		E443C2E02DC451D100FA7B45 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443C2DF2DC451C800FA7B45 /* Products.swift */; };
+		E443C2E42DC4575900FA7B45 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443C2E32DC4575900FA7B45 /* CartView.swift */; };
 		E49276062DC3D837008B25EA /* EstiloKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49276052DC3D837008B25EA /* EstiloKApp.swift */; };
 		E49276082DC3D874008B25EA /* EstiloKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49276072DC3D874008B25EA /* EstiloKTests.swift */; };
 		E492760B2DC3D8D4008B25EA /* EstiloKUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492760A2DC3D8D4008B25EA /* EstiloKUITestsLaunchTests.swift */; };
@@ -140,6 +142,8 @@
 		E4189C992D9D8DA9005FA7C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4189D422D9E1F29005FA7C0 /* VisitedRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedRestaurantsView.swift; sourceTree = "<group>"; };
 		E443C2DD2DC4293100FA7B45 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		E443C2DF2DC451C800FA7B45 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
+		E443C2E32DC4575900FA7B45 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		E49276052DC3D837008B25EA /* EstiloKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstiloKApp.swift; sourceTree = "<group>"; };
 		E49276072DC3D874008B25EA /* EstiloKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstiloKTests.swift; sourceTree = "<group>"; };
 		E49276092DC3D8D4008B25EA /* EstiloKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstiloKUITests.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A56E86272DC520E60057AD34 /* Appointment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Appointment; sourceTree = "<group>"; };
 		A5C90ED02D9D27F000E322EE /* Images */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Images; sourceTree = "<group>"; };
 		A5C90ED12D9D581F00E322EE /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
 		A5C90ED42D9D869F00E322EE /* Restaurant */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Restaurant; sourceTree = "<group>"; };
@@ -236,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				AB04D6AA2DC526FD00B4BFEF /* Courses */,
+				A56E86272DC520E60057AD34 /* Appointment */,
 				AB04D63D2DC477EF00B4BFEF /* Payment */,
 				AB04D5FD2DC40E0000B4BFEF /* Onboarding */,
 				ABA417B82D9E1B6600980862 /* Map */,
@@ -244,6 +250,8 @@
 				ABEC82B22D9D331B0051495B /* Social */,
 				AB1D139B2B9582570025EFFA /* Profile */,
 				06D181A22B92378A00352475 /* HomeView.swift */,
+				E443C2DF2DC451C800FA7B45 /* Products.swift */,
+				E443C2E32DC4575900FA7B45 /* CartView.swift */,
 				061572BB2B924CC8002F6ADD /* Plant */,
 				061572B92B924CAF002F6ADD /* Garden */,
 				061572AC2B9244AF002F6ADD /* LogIn */,
@@ -395,6 +403,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				A56E86272DC520E60057AD34 /* Appointment */,
 				A5C90ED02D9D27F000E322EE /* Images */,
 				A5C90ED12D9D581F00E322EE /* Search */,
 				A5C90ED42D9D869F00E322EE /* Restaurant */,
@@ -538,6 +547,7 @@
 				0640D19E2B9A8615003726B1 /* Pot.rcproject in Sources */,
 				AB1D139F2B95A2F30025EFFA /* EditPlantView.swift in Sources */,
 				06D181A32B92378A00352475 /* HomeView.swift in Sources */,
+				E443C2E02DC451D100FA7B45 /* Products.swift in Sources */,
 				061572C52B924E30002F6ADD /* GardenView.swift in Sources */,
 				AB1D138C2B9395030025EFFA /* PlantMiniCardView.swift in Sources */,
 				AB1D13862B9382590025EFFA /* NotificationView.swift in Sources */,
@@ -553,6 +563,7 @@
 				AB200DD92B992873002DE93A /* PlantCardView.swift in Sources */,
 				E4189C922D9D1415005FA7C0 /* ProfileView.swift in Sources */,
 				061572C92B924E75002F6ADD /* PlantView.swift in Sources */,
+				E443C2E42DC4575900FA7B45 /* CartView.swift in Sources */,
 				E443C2DE2DC4293100FA7B45 /* SignIn.swift in Sources */,
 				AB200DD72B98EC7D002DE93A /* GeneralGardenView.swift in Sources */,
 				ABEC82B32D9D331B0051495B /* SocialGeneralView.swift in Sources */,

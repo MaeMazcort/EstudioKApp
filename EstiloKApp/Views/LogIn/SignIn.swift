@@ -6,8 +6,7 @@ struct SignInView: View {
     @State private var rememberMe: Bool = false
     @State private var isPasswordVisible: Bool = false
     @State private var isShowingSignUp = false
-    @State private var isShowingHome = false  // Renamed from isShowingNavBar for clarity
-
+    @State private var isShowingHome = false  
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {

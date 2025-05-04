@@ -8,6 +8,8 @@ struct Product: Identifiable {
 }
 
 struct HomeView: View {
+    @State private var selectedProduct: Product?
+    
     let popularProducts = [
         Product(name: "Grapeseed Oil", price: "$259.00", imageName: "oil"),
         Product(name: "Bio Shampoo", price: "$310.00", imageName: "shampoo"),
@@ -36,7 +38,6 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
-                    // Header
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Welcome Andrea")
@@ -52,7 +53,6 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
 
-                    // Search bar
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
@@ -85,8 +85,7 @@ struct HomeView: View {
                                     .foregroundColor(.white)
                                     .multilineTextAlignment(.trailing)
 
-                                Button(action: {
-                                }) {
+                                Button(action: {}) {
                                     Text("Buy now")
                                         .fontWeight(.bold)
                                         .padding(.horizontal, 20)
@@ -103,18 +102,24 @@ struct HomeView: View {
                     .frame(height: 150)
                     .padding(.horizontal)
 
-                    // Popular section
-                    ProductSection(title: "Popular this week!", products: popularProducts)
-
-                    // On Sale section
-                    ProductSection(title: "On Sale", products: onSaleProducts)
-
-                    // Buy again
-                    ProductSection(title: "Buy again", products: buyAgain)
-
-                    // Specially for you
-                    ProductSection(title: "Specially for you", products: recommended)
+                    ProductSection(title: "Popular this week!", products: popularProducts, selectedProduct: $selectedProduct)
+                    ProductSection(title: "On Sale", products: onSaleProducts, selectedProduct: $selectedProduct)
+                    ProductSection(title: "Buy again", products: buyAgain, selectedProduct: $selectedProduct)
+                    ProductSection(title: "Specially for you", products: recommended, selectedProduct: $selectedProduct)
                 }
+                .background(
+                    NavigationLink(
+                        destination: selectedProduct.map { product in
+                            let priceString = product.price.dropFirst()
+                            let priceDouble = Double(priceString) ?? 0.0
+                            return Products(productImageName: product.imageName, productName: product.name, price: priceDouble)
+                        },
+                        isActive: Binding(
+                            get: { selectedProduct != nil },
+                            set: { isActive in if !isActive { selectedProduct = nil } }
+                        )
+                    ) { EmptyView() }
+                )
             }
             .navigationBarHidden(true)
         }
@@ -124,6 +129,7 @@ struct HomeView: View {
 struct ProductSection: View {
     let title: String
     let products: [Product]
+    @Binding var selectedProduct: Product?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -141,39 +147,34 @@ struct ProductSection: View {
                 HStack(spacing: 16) {
                     ForEach(products) { product in
                         VStack(alignment: .leading) {
-                            Rectangle()
-                                .fill(Color.gray.opacity(0.3))
+                            Image(product.imageName)
+                                .resizable()
+                                .scaledToFill()
                                 .frame(width: 120, height: 120)
-                                .overlay(
-                                    Image(product.imageName)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 120, height: 120)
-                                            .clipped()
-                                            .cornerRadius(10)
-                                )
+                                .clipped()
                                 .cornerRadius(10)
+                            
                             Text(product.name)
                                 .font(.caption)
                                 .lineLimit(2)
+                            
                             Text(product.price)
                                 .font(.caption)
                                 .bold()
                         }
                         .frame(width: 120)
+                        .onTapGesture {
+                            selectedProduct = product
+                        }
                     }
                 }
                 .padding(.horizontal)
             }
         }
         .padding(.top)
-        .navigationBarBackButtonHidden(true)
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
+#Preview {
+    HomeView()
 }
 
